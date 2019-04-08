@@ -1,85 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>Giftastic</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+  <meta charset="utf-8">
+  <title>Quoth the Giphy</title>
 </head>
+
 <body>
+  <div id="buttons">
+    <button data-person="Game of Thrones">
+        Game of Thrones
+    </button>
+    <button data-person="How to Get Away With Murder">
+        How to Get Away With Murder
+    </button>
+    <button data-person="The Office">
+        The Office
+    </button>
+    <button data-person="Rupaul's Drag Race">
+        Rupaul's Drag Race
+    </button>
+    <button data-person="Stranger Things">
+        Stranger Things 
+    </button>
+    <button data-person="Silicon Valley">
+        Silicon Valley 
+    </button>
 
-    <div id="buttons-view"></div>
-    <br>
+  </div>
+  <br>
     <form id="movie-form">
-        <label for="movie-input">Add a Show!</label>
-        <input type="text" id="show-input"><br>
+    <label for="movie-input">Add a Show!</label>
+    <input type="text" id="show-input"><br>
       
-        <!-- This is our button to add new shows to the array -->
-        <input id="add-show-button" type="submit" value="Add a Show">
-    </form>
+    <!-- This is our button to add new shows to the array -->
+    <input id="add-show-button" type="submit" value="Add a Show">
+    <button id="main-button"></button>
+</form>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+  <div id="gifs-appear-here">
+  </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
 
-    /*$("#add-show-button").on("click", function() {
-     // var person = $(this).attr("data-person");
+    $("button").on("click", function() {
+      var person = $(this).attr("data-person");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=1Y3aGj0Wkz2FtUFgu7RqH0F8uipBejeB&limit=10"&rating=g;
+        person + "&api_key=1Y3aGj0Wkz2FtUFgu7RqH0F8uipBejeB&limit=10";
 
-      $.ajax({
+    $.ajax({
         url: queryURL,
         method: "GET"
-      })
-        .then(function(response) {
-          var results = response.data;
+    })
+    .then(function(response) {
+    var results = response.data;
 
-          for (var i = 0; i < results.length; i++) {
-            var gifDiv = $("<div>");
+        for (var i = 0; i < results.length; i++) {
+        var gifDiv = $("<div>");
 
-            var rating = results[i].rating;
+        var rating = results[i].rating;
 
-            var p = $("<p>").text("Rating: " + rating);
+        var p = $("<p>").text("Rating: " + rating);
 
-            var personImage = $("<img>");
-            personImage.attr("src", results[i].images.fixed_height.url);
+        var personImage = $("<img>");
+        personImage.attr("src", results[i].images.fixed_height.url);
 
-            gifDiv.prepend(p);
-            gifDiv.prepend(personImage);
+        gifDiv.prepend(p);
+        gifDiv.prepend(personImage);
 
-            $("#gifs-appear-here").prepend(gifDiv);
-          }
-        });
-    });*/
-
-    //array of our variables, tv shows 
-    var topics =  ["game of thrones", "this is us", "grey's anatomy", "veep", "the walking dead", "rupaul's drag race", "the office", "stranger things", "silicon valley", "queer eye"];
-    console.log(topics);
-    
-
-    // Function for displaying movie data
-    function renderButtons() {
-
-    // Deleting the movie buttons prior to adding new movie buttons
-    // (this is necessary otherwise we will have repeat buttons)
-    $("#buttons-view").empty();
-
-    // Looping through the array of movies
-    for (var i = 0; i < topics.length; i++) {
-
-    // Then dynamicaly generating buttons for each movie in the array.
-    // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
-    var a = $("<button>");
-    // Adding a class
-    a.addClass("movie");
-    // Adding a data-attribute with a value of the movie at index i
-    a.attr("data-name", topics[i]);
-    // Providing the button's text with a value of the movie at index i
-    a.text(topics[i]);
-    // Adding the button to the HTML
-    $("#buttons-view").append(a);
-  }
-}
+        $("#gifs-appear-here").prepend(gifDiv);
+        }
+    });
+});
     // This function handles events where one button is clicked
     $("#add-show-button").on("click", function(event) {
     // event.preventDefault() prevents the form from trying to submit itself.
@@ -89,19 +82,17 @@
     // This line will grab the text from the input box
     var tvshow = $("#show-input").val().trim();
     // The movie from the textbox is then added to our array
-    topics.push(tvshow);
-
-    // calling renderButtons which handles the processing of our movie array
-    renderButtons();
+   // "#buttons".push(tvshow);
+    $("#buttons").append(tvshow)
     });
 
+    // calling renderButtons which handles the processing of our movie array
+    //renderButtons();
+   // });
+
     // Calling the renderButtons function at least once to display the initial list of movies
-    renderButtons();
-        
-    </script>
-
-
-
+   // renderButtons();
+  </script>
 </body>
 
 </html>
