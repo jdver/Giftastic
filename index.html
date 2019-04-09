@@ -4,10 +4,12 @@
 <head>
   <meta charset="utf-8">
   <title>Quoth the Giphy</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-  <div id="buttons">
+    <!--Div that stores all our buttons-->
+<div id="buttons" class="btn btn-info">
     <button data-person="Game of Thrones">
         Game of Thrones
     </button>
@@ -27,9 +29,10 @@
         Silicon Valley 
     </button>
 
-  </div>
-  <br>
-    <form id="movie-form">
+</div>
+<br>
+  <!--div to store our search bar -->
+<form id="movie-form">
     <label for="movie-input">Add a Show!</label>
     <input type="text" id="show-input"><br>
       
@@ -38,21 +41,23 @@
     <button id="main-button"></button>
 </form>
 
-  <div id="gifs-appear-here">
-  </div>
+<div id="gifs-appear-here">
+</div>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-
+    //creating our on click function to querie the giphy api 
     $("button").on("click", function() {
       var person = $(this).attr("data-person");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         person + "&api_key=1Y3aGj0Wkz2FtUFgu7RqH0F8uipBejeB&limit=10";
-
+    //ajax method to contact the api / server 
     $.ajax({
         url: queryURL,
         method: "GET"
     })
+    //store response in variable 
     .then(function(response) {
     var results = response.data;
 
@@ -73,26 +78,19 @@
         }
     });
 });
-    // This function handles events where one button is clicked
+    // Add new input to buttons dispaly on click 
     $("#add-show-button").on("click", function(event) {
-    // event.preventDefault() prevents the form from trying to submit itself.
-    // We're using a form so that the user can hit enter instead of clicking the button if they want
+    // preventing the form from submitting itself 
     event.preventDefault();
 
     // This line will grab the text from the input box
     var tvshow = $("#show-input").val().trim();
-    // The movie from the textbox is then added to our array
-   // "#buttons".push(tvshow);
+    //append the new submission using jquery 
     $("#buttons").append(tvshow)
     });
 
-    // calling renderButtons which handles the processing of our movie array
-    //renderButtons();
-   // });
 
-    // Calling the renderButtons function at least once to display the initial list of movies
-   // renderButtons();
-  </script>
+</script>
 </body>
 
 </html>
