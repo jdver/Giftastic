@@ -48,8 +48,8 @@ function displayGifs () {
           // Only taking action if the photo has an appropriate rating
           if (item.rating !== 'r' && item.rating !== 'pg-13') {
             // Creating a div for the gif
-
-            document.querySelector('#gifs-appear-here').innerHTML = ''
+            // **Might need this line later
+            // document.querySelector('#gifs-appear-here').innerHTML = ''
             var gifDiv = document.createElement('div')
             gifDiv.classList.add('gifDiv')
 
@@ -83,6 +83,8 @@ function displayGifs () {
       })
   }
 }
+
+// handles playing and pausing of gifs
 document.querySelector('#gifs-appear-here').addEventListener('click', function (event) {
   if (event.target.tagName === 'img'.toUpperCase()) {
     let currentImg = event.target
