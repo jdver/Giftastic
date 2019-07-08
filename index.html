@@ -8,9 +8,10 @@
 </head>
 
 <body>
-    <!--Div that stores all our buttons-->
+    <!--Div that stores all our TV show buttons-->
 <div id="buttons" class="btn btn-info">
-    <button data-person="Game of Thrones">
+
+    <!-- <button data-person="Game of Thrones">
         Game of Thrones
     </button>
     <button data-person="How to Get Away With Murder">
@@ -27,70 +28,27 @@
     </button>
     <button data-person="Silicon Valley">
         Silicon Valley 
-    </button>
+    </button> -->
 
 </div>
 <br>
   <!--div to store our search bar -->
-<form id="movie-form">
-    <label for="movie-input">Add a Show!</label>
+  <div class="container">
+    <form>
+  <div class="form-group">
+    <label for="show-input">Add a Show!</label>
     <input type="text" id="show-input"><br>
-      
+</div>
     <!-- This is our button to add new shows to the array -->
-    <input id="add-show-button" type="submit" value="Add a Show">
-    <button id="main-button"></button>
+    <button type="submit" id="submit" class="btn btn-secondary">Submit</button>
 </form>
-
-<div id="gifs-appear-here">
+</div>
+<div class="container" id="gifs-appear-here">
 </div>
  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script src="./assets/app.js"></script>
 
-    //creating our on click function to querie the giphy api 
-    $("button").on("click", function() {
-      var person = $(this).attr("data-person");
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=1Y3aGj0Wkz2FtUFgu7RqH0F8uipBejeB&limit=10";
-    //ajax method to contact the api / server 
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
-    //store response in variable 
-    .then(function(response) {
-    var results = response.data;
-
-        for (var i = 0; i < results.length; i++) {
-        var gifDiv = $("<div>");
-
-        var rating = results[i].rating;
-
-        var p = $("<p>").text("Rating: " + rating);
-
-        var personImage = $("<img>");
-        personImage.attr("src", results[i].images.fixed_height.url);
-
-        gifDiv.prepend(p);
-        gifDiv.prepend(personImage);
-
-        $("#gifs-appear-here").prepend(gifDiv);
-        }
-    });
-});
-    // Add new input to buttons dispaly on click 
-    $("#add-show-button").on("click", function(event) {
-    // preventing the form from submitting itself 
-    event.preventDefault();
-
-    // This line will grab the text from the input box
-    var tvshow = $("#show-input").val().trim();
-    //append the new submission using jquery 
-    $("#buttons").append(tvshow)
-    });
-
-
-</script>
 </body>
 
 </html>
